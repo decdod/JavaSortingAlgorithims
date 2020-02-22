@@ -18,8 +18,18 @@
      *
      */
     static double [] insertionSort (double a[]){
-
-        //todo: implement the sort
+    	
+    	double tempValue;
+    	for(int i = 0; i < a.length; i++) {
+    		for(int j = i; j > 0; j--) {
+    			if(a[j] < a[j - 1]) {
+    				tempValue = a[j];
+    				a[j] = a[j - 1];
+    				a[j-1] = tempValue;
+    			}
+    		}
+    	}
+    	return a;
     }//end insertionsort
 	
 	    /**
@@ -30,9 +40,20 @@
      *
      */
     static double [] selectionSort (double a[]){
-
-         //todo: implement the sort
-
+		double tempValue;
+    	for(int i = 0; i < (a.length - 1); i++) {
+    		int baseValue = i;
+    		for(int j = i+1; j < a.length; j++) {
+    			if(a[j] < a[baseValue]) {
+    				baseValue = j;
+    			}
+    			tempValue = a[baseValue];
+    			a[baseValue] = a[i];
+    			a[i] = tempValue;
+    		}
+    		
+    	}
+    	return a;
     }//end selectionsort
 
     /**
