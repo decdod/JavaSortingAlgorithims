@@ -71,7 +71,13 @@
      * @return array sorted in ascending order
      *
      */
-    static double [] quickSort (double a[], int low, int high){
+    static double [] quickSort (double a[]){
+    	quickSortLoop(a, 0, a.length);
+		return a;
+    }
+    
+
+    static double [] quickSortLoop (double a[], int low, int high){
     	
     	if(a == null) {
     		return a;
@@ -79,8 +85,8 @@
     	
     	if(low < high) {
     		int partition = partition(a, low, high);
-    		quickSort(a, low, partition - 1);
-    		quickSort(a, partition+1, high);
+    		quickSortLoop(a, low, partition - 1);
+    		quickSortLoop(a, partition+1, high);
 
 
     	}
@@ -125,7 +131,7 @@
      * @return after the method returns, the array must be in ascending sorted order.
      */
 
-    static double[] mergeSortIterative (double a[]) {
+  /*  static double[] mergeSortIterative (double a[]) {
 
 		 //todo: implement the sort
 	
@@ -140,6 +146,7 @@
      * @param a: An unsorted array of doubles.
      * @return after the method returns, the array must be in ascending sorted order.
      */
+    
     static double[] mergeSortRecursive (double a[]) {
     	
     	if(a == null || a.length <= 1) {
