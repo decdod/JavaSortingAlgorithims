@@ -131,15 +131,78 @@
      * @return after the method returns, the array must be in ascending sorted order.
      */
 
-  /*  static double[] mergeSortIterative (double a[]) {
-
-		 //todo: implement the sort
+    static double[] mergeSortIterative (double a[]) {
+    	if(a == null || a.length <= 1) {
+    		return a;
+    	}
+    	int size, low;
+		int N = a.length - 1; //size of array
+		for( size = 1 ; size <= N-1; size = (size + size)) {
+			for( low = 0; low < N - 1; low += (size + size)) {
+				int mid = Math.min(low + size - 1, N-1);
+				int high = Math.min(low + (size + size - 1), N-1);
+				int lowBoundary = mid - low + 1;
+				int midBoundary = high - mid;
+				
+				merge(a, low, mid, high, lowBoundary, midBoundary);
+					
+				}
+			}
+		return a;
+			
+		}
 	
-    }//end mergesortIterative
+    //end mergesortIterative
     
     
     
-    /**
+    private static void merge(double[] a, int low, int mid, int high, int lowBoundary, int midBoundary) {
+    	//variables will be used by multiple loops
+    	
+    	//instead of auxiliary these are temporary arrays with boundary limits
+    	double lowArray[] = new double[lowBoundary];
+    	double highArray[] = new double[midBoundary];
+    	int count = 0;
+    	while(count < lowBoundary) {
+    		lowArray[count] = a[low + count++];
+    	}
+    	count = 0;
+    	while(count < midBoundary) {
+    		highArray[count] = a[mid + 1 + count++];
+    	}
+    	int i, j;
+    	i = j = 0;
+    	int k=1;
+
+    	
+    	while(i < lowBoundary && j < midBoundary) {	//merging groups
+    		if(lowArray[i] <= highArray[j]) {
+    			a[k] = lowArray[i];
+    			i++;
+    		}
+    		else {
+    			a[k] = highArray[j];
+    			j++;
+    		}
+			k++;
+
+    	}
+    	while(i < lowBoundary) { //what is not initially sorted (low over) will be added to end of merge groups
+
+    		a[k] = lowArray[i];
+    		i++;
+    		k++;
+    	}
+    	while(j < midBoundary) {
+
+    		a[k] = highArray[j];
+    		j++;
+    		k++;
+    	}
+    			
+	}
+
+	/**
      * Sorts an array of doubles using recursive implementation of Merge Sort.
      * This method is static, thus it can be called as SortComparison.sort(a)
      *
@@ -154,9 +217,9 @@
     	}
     	
     	int pivot = a.length / 2;
-    	double[] left = new double[pivot];	//splitting array into merge-groups
+    	double[] low = new double[pivot];	//splitting array into merge-groups
     	for(int i = 0; i < pivot; i++) {
-    		left[i] = a[i];
+    		low[i] = a[i];
     	}
     	
     	double[] right = new double[a.length - pivot];
@@ -164,15 +227,15 @@
     		right[i - pivot] = a[i];
     	}
     	
-    	mergeSortRecursive(left);
+    	mergeSortRecursive(low);
     	mergeSortRecursive(right);
     	
     	int i,j,k;	//variables will be used by multiple loops
     	i = j = k = 0;
     	
-    	while(i < left.length && j < right.length) {	//merging groups
-    		if(left[i] < right[j]) {
-    			a[k] = left[i];
+    	while(i < low.length && j < right.length) {	//merging groups
+    		if(low[i] < right[j]) {
+    			a[k] = low[i];
     			i++;
     		}
     		else {
@@ -182,13 +245,15 @@
 			k++;
 
     	}
-    	while(i < left.length) { //what is not initially sorted (left over) will be added to end of merge groups
-    		a[k] = left[i];
+    	while(i < low.length) { //what is not initially sorted (low over) will be added to end of merge groups
+
+    		a[k] = low[i];
     		i++;
     		k++;
     	}
     	while(j < right.length) {
-    		a[k] = right[k];
+
+    		a[k] = right[j];
     		j++;
     		k++;
     	}
