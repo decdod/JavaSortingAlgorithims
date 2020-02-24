@@ -84,6 +84,9 @@ public class SortComparisonTest
     	}
     	listOfArrays.add(a);
      }
+     
+     boolean x = false;
+     double[] c = SortComparison.selectionSort(listOfArrays.get(0));
      //Timing algorithims - changed for each algorithim manually to test for table
      long[] timeSort = new long[7];
      for(int i = 0; i < 7; i++) {
@@ -93,8 +96,7 @@ public class SortComparisonTest
     	 long duration = (endTime - startTime);
     	 timeSort[i] = duration;
      }
-     boolean x = false;
-     double[] c = SortComparison.mergeSortIterative(listOfArrays.get(0));
+
 //     if(c == correctAnswers[0]) {
 //    	 x = true;
 //     }

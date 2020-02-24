@@ -44,17 +44,14 @@
      */
     static double [] selectionSort (double a[]){
     	
-    	if(a == null) {
-    		return a;
-    	}
-    	
-		double tempValue;
     	for(int i = 0; i < (a.length - 1); i++) {
     		int baseValue = i;
     		for(int j = i+1; j < a.length; j++) {
     			if(a[j] < a[baseValue]) {
     				baseValue = j;
     			}
+    			double tempValue;
+
     			tempValue = a[baseValue];
     			a[baseValue] = a[i];
     			a[i] = tempValue;
@@ -63,6 +60,26 @@
     	}
     	return a;
     }//end selectionsort
+    
+//    static double[] selectionSort(double arr[])
+//    {
+//    int n = arr.length;
+//    // One by one move boundary of unsorted subarray
+//    for (int i = 0; i < n-1; i++)
+//    {
+//    // Find the minimum element in unsorted array
+//    int min_idx = i;
+//    for (int j = i+1; j < n; j++)
+//    if (arr[j] < arr[min_idx])
+//    min_idx = j;
+//    // Swap the found minimum element with the first
+//    // element
+//    double temp = arr[min_idx];
+//    arr[min_idx] = arr[i];
+//    arr[i] = temp;
+//    }
+//	return arr;
+//    }
 
     /**
      * Sorts an array of doubles using Quick Sort.
@@ -172,7 +189,7 @@
     	}
     	int i, j;
     	i = j = 0;
-    	int k=1;
+    	int k=0;
 
     	
     	while(i < lowBoundary && j < midBoundary) {	//merging groups
