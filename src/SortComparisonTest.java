@@ -42,26 +42,11 @@ public class SortComparisonTest
         assertEquals("must be the same", a, SortComparison.insertionSort(a));
         assertEquals("must be the same", a, SortComparison.selectionSort(a));
         assertEquals("must be the same", a, SortComparison.quickSort(a));
-    //    assertEquals("must be the same", a, SortComparison.mergeSortIterative(a));
+        assertEquals("must be the same", a, SortComparison.mergeSortIterative(a));
         assertEquals("must be the same", a, SortComparison.mergeSortRecursive(a));
-
-
-    	
-    	
     }
-
-
-    // TODO: add more tests here. Each line of code and ech decision in Collinear.java should
-    // be executed at least once from at least one test.
-
-    // ----------------------------------------------------------
-    /**
-     *  Main Method.
-     *  Use this main method to create the experiments needed to answer the experimental performance questions of this assignment.
-     * @throws IOException 
-     *
-     */
-    public static void main(String[] args) throws IOException{
+    @Test
+    public void tests() {
     	int nameCount = 0;
         String[] fileNames = {"numbers10.txt", "numbers100.txt", "numbers1000.txt", "numbers1000Duplicates.txt", "numbersNearlyOrdered1000.txt", "numbersReverse1000.txt", "numbersSorted1000.txt"};
         double[][] arrayList = new double[7][];
@@ -73,17 +58,19 @@ public class SortComparisonTest
     	String dir = System.getProperty("user.dir") + "/input/" + fileNames[nameCount++];
     	Path p = Paths.get(dir);
     	File f = new File(p.toString());
-    	BufferedReader br = new BufferedReader(new FileReader(f));
-    	long lineCount = Files.lines(p).count();
-    	
-    	double a[] = new double[(int) lineCount];
-    	int count = 0;
-    	
-    	for (String line = br.readLine(); line != null; line = br.readLine()) {
-    		a[count++] = Double.valueOf(line);
-    	}
-    	listOfArrays.add(a);
+//    	BufferedReader br = new BufferedReader(new FileReader(f));
+//    	long lineCount = Files.lines(p).count();
+//    	
+//    	double a[] = new double[(int) lineCount];
+//    	int count = 0;
+//    	
+//    	for (String line = br.readLine(); line != null; line = br.readLine()) {
+//    		a[count++] = Double.valueOf(line);
+//    	}
+//    	listOfArrays.add(a);
+//    	br.close();
      }
+     
      
      boolean x = false;
      double[] c = SortComparison.selectionSort(listOfArrays.get(0));
@@ -96,62 +83,82 @@ public class SortComparisonTest
     	 long duration = (endTime - startTime);
     	 timeSort[i] = duration;
      }
-
-//     if(c == correctAnswers[0]) {
-//    	 x = true;
-//     }
-//    	
-    	
 //numbers10.txt
     	
         assertEquals("insertion sort check 100", correctAnswers[0], SortComparison.insertionSort(listOfArrays.get(0)));
         assertEquals("selection sort check 100", correctAnswers[0], SortComparison.selectionSort(listOfArrays.get(0)));
         assertEquals("quick sort check 100", correctAnswers[0], SortComparison.quickSort(listOfArrays.get(0)));
         assertEquals("merge sort recursive check 100", correctAnswers[0], SortComparison.mergeSortRecursive(listOfArrays.get(0)));
-      //assertEquals("merge sort iterative 100", correctAnswers[0], SortComparison.insertionSort(listOfArrays.get(0)));
+        assertEquals("merge sort iterative 100", correctAnswers[0], SortComparison.insertionSort(listOfArrays.get(0)));
         
 //numbers100.txt
-        assertEquals("insertion sort check 100", correctAnswers[0], SortComparison.insertionSort(listOfArrays.get(0)));
-        assertEquals("selection sort check 100", correctAnswers[0], SortComparison.selectionSort(listOfArrays.get(0)));
-        assertEquals("quick sort check 100", correctAnswers[0], SortComparison.quickSort(listOfArrays.get(0)));
-        assertEquals("merge sort recursive check 100", correctAnswers[0], SortComparison.mergeSortRecursive(listOfArrays.get(0)));
-      //assertEquals("merge sort iterative 100", correctAnswers[0], SortComparison.insertionSortlistOfArrays.get(0)a));
+        assertEquals("insertion sort check 100", correctAnswers[1], SortComparison.insertionSort(listOfArrays.get(0)));
+        assertEquals("selection sort check 100", correctAnswers[1], SortComparison.selectionSort(listOfArrays.get(0)));
+        assertEquals("quick sort check 100", correctAnswers[1], SortComparison.quickSort(listOfArrays.get(0)));
+        assertEquals("merge sort recursive check 100", correctAnswers[1], SortComparison.mergeSortRecursive(listOfArrays.get(0)));
+        assertEquals("merge sort iterative 100", correctAnswers[1], SortComparison.insertionSort(listOfArrays.get(0)));
         
 //numbers1000.txt
-        assertEquals("insertion sort check 100", correctAnswers[0], SortComparison.insertionSort(listOfArrays.get(0)));
-        assertEquals("selection sort check 100", correctAnswers[0], SortComparison.selectionSort(listOfArrays.get(0)));
-        assertEquals("quick sort check 100", correctAnswers[0], SortComparison.quickSort(listOfArrays.get(0)));
-        assertEquals("merge sort recursive check 100", correctAnswers[0], SortComparison.mergeSortRecursive(listOfArrays.get(0)));
-      //assertEquals("merge sort iterative 100", correctAnswers[0], SortComparison.insertionSortlistOfArrays.get(0)a));
+        assertEquals("insertion sort check 100", correctAnswers[2], SortComparison.insertionSort(listOfArrays.get(0)));
+        assertEquals("selection sort check 100", correctAnswers[2], SortComparison.selectionSort(listOfArrays.get(0)));
+        assertEquals("quick sort check 100", correctAnswers[2], SortComparison.quickSort(listOfArrays.get(0)));
+        assertEquals("merge sort recursive check 100", correctAnswers[2], SortComparison.mergeSortRecursive(listOfArrays.get(0)));
+        assertEquals("merge sort iterative 100", correctAnswers[2], SortComparison.insertionSort(listOfArrays.get(0)));
         
 //numbers1000Duplicates.txt
-        assertEquals("insertion sort check 100", correctAnswers[0], SortComparison.insertionSort(listOfArrays.get(0)));
-        assertEquals("selection sort check 100", correctAnswers[0], SortComparison.selectionSort(listOfArrays.get(0)));
-        assertEquals("quick sort check 100", correctAnswers[0], SortComparison.quickSort(listOfArrays.get(0)));
-        assertEquals("merge sort recursive check 100", correctAnswers[0], SortComparison.mergeSortRecursive(listOfArrays.get(0)));
-      //assertEquals("merge sort iterative 100", correctAnswers[0], SortComparison.insertionSortlistOfArrays.get(0)a));
+        assertEquals("insertion sort check 100", correctAnswers[3], SortComparison.insertionSort(listOfArrays.get(0)));
+        assertEquals("selection sort check 100", correctAnswers[3], SortComparison.selectionSort(listOfArrays.get(0)));
+        assertEquals("quick sort check 100", correctAnswers[3], SortComparison.quickSort(listOfArrays.get(0)));
+        assertEquals("merge sort recursive check 100", correctAnswers[3], SortComparison.mergeSortRecursive(listOfArrays.get(0)));
+        assertEquals("merge sort iterative 100", correctAnswers[3], SortComparison.insertionSort(listOfArrays.get(0)));
         
 //numbersNearlyOrdered1000.txt
-        assertEquals("insertion sort check 100", correctAnswers[0], SortComparison.insertionSort(listOfArrays.get(0)));
-        assertEquals("selection sort check 100", correctAnswers[0], SortComparison.selectionSort(listOfArrays.get(0)));
-        assertEquals("quick sort check 100", correctAnswers[0], SortComparison.quickSort(listOfArrays.get(0)));
-        assertEquals("merge sort recursive check 100", correctAnswers[0], SortComparison.mergeSortRecursive(listOfArrays.get(0)));
-      //assertEquals("merge sort iterative 100", correctAnswers[0], SortComparison.insertionSort(listOfArrays.get(0)));
+        assertEquals("insertion sort check 100", correctAnswers[4], SortComparison.insertionSort(listOfArrays.get(0)));
+        assertEquals("selection sort check 100", correctAnswers[4], SortComparison.selectionSort(listOfArrays.get(0)));
+        assertEquals("quick sort check 100", correctAnswers[4], SortComparison.quickSort(listOfArrays.get(0)));
+        assertEquals("merge sort recursive check 100", correctAnswers[4], SortComparison.mergeSortRecursive(listOfArrays.get(0)));
+        assertEquals("merge sort iterative 100", correctAnswers[4], SortComparison.insertionSort(listOfArrays.get(0)));
         
 //numbersReverse1000.txt
-        assertEquals("insertion sort check 100", correctAnswers[0], SortComparison.insertionSort(listOfArrays.get(0)));
-        assertEquals("selection sort check 100", correctAnswers[0], SortComparison.selectionSort(listOfArrays.get(0)));
-        assertEquals("quick sort check 100", correctAnswers[0], SortComparison.quickSort(listOfArrays.get(0)));
-        assertEquals("merge sort recursive check 100", correctAnswers[0], SortComparison.mergeSortRecursive(listOfArrays.get(0)));
-      //assertEquals("merge sort iterative 100", correctAnswers[0], SortComparison.insertionSort(listOfArrays.get(0)));
+        assertEquals("insertion sort check 100", correctAnswers[5], SortComparison.insertionSort(listOfArrays.get(0)));
+        assertEquals("selection sort check 100", correctAnswers[5], SortComparison.selectionSort(listOfArrays.get(0)));
+        assertEquals("quick sort check 100", correctAnswers[5], SortComparison.quickSort(listOfArrays.get(0)));
+        assertEquals("merge sort recursive check 100", correctAnswers[5], SortComparison.mergeSortRecursive(listOfArrays.get(0)));
+        assertEquals("merge sort iterative 100", correctAnswers[5], SortComparison.insertionSort(listOfArrays.get(0)));
         
 //numbersSorted1000.txt
-        assertEquals("insertion sort check 100", correctAnswers[0], SortComparison.insertionSort(listOfArrays.get(0)));
-        assertEquals("selection sort check 100", correctAnswers[0], SortComparison.selectionSort(listOfArrays.get(0)));
-        assertEquals("quick sort check 100", correctAnswers[0], SortComparison.quickSort(listOfArrays.get(0)));
-        assertEquals("merge sort recursive check 100", correctAnswers[0], SortComparison.mergeSortRecursive(listOfArrays.get(0)));
-      //assertEquals("merge sort iterative 100", correctAnswers[0], SortComparison.insertionSort(listOfArrays.get(0)));
+        assertEquals("insertion sort check 100", correctAnswers[6], SortComparison.insertionSort(listOfArrays.get(0)));
+        assertEquals("selection sort check 100", correctAnswers[6], SortComparison.selectionSort(listOfArrays.get(0)));
+        assertEquals("quick sort check 100", correctAnswers[6], SortComparison.quickSort(listOfArrays.get(0)));
+        assertEquals("merge sort recursive check 100", correctAnswers[6], SortComparison.mergeSortRecursive(listOfArrays.get(0)));
+        assertEquals("merge sort iterative 100", correctAnswers[6], SortComparison.insertionSort(listOfArrays.get(0)));
+     }
 
+
+
+    	
+    	
+    
+    
+
+    // TODO: add more tests here. Each line of code and ech decision in Collinear.java should
+    // be executed at least once from at least one test.
+
+    // ----------------------------------------------------------
+    /**
+     *  Main Method.
+     *  Use this main method to create the experiments needed to answer the experimental performance questions of this assignment.
+     * @throws IOException 
+     *
+     */
+    public static void main(String[] args) throws IOException{
+
+
+//     if(c == correctAnswers[0]) {
+//    	 x = true;
+//     }
+//    	
+    	
 
 
         
