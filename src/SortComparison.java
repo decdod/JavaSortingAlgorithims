@@ -14,7 +14,7 @@
      * Sorts an array of doubles using InsertionSort.
      * This method is static, thus it can be called as SortComparison.sort(a)
      * @param a: An unsorted array of doubles.
-     * @return array sorted in ascending order.
+     * @return array sorted in aschighing order.
      *
      */
     static double [] insertionSort (double a[]){
@@ -33,13 +33,13 @@
     		}
     	}
     	return a;
-    }//end insertionsort
+    }//high insertionsort
 	
 	    /**
      * Sorts an array of doubles using Selection Sort.
      * This method is static, thus it can be called as SortComparison.sort(a)
      * @param a: An unsorted array of doubles.
-     * @return array sorted in ascending order
+     * @return array sorted in aschighing order
      *
      */
     static double [] selectionSort (double a[]){
@@ -59,85 +59,58 @@
     		
     	}
     	return a;
-    }//end selectionsort
+    }//high selectionsort
     
-//    static double[] selectionSort(double arr[])
-//    {
-//    int n = arr.length;
-//    // One by one move boundary of unsorted subarray
-//    for (int i = 0; i < n-1; i++)
-//    {
-//    // Find the minimum element in unsorted array
-//    int min_idx = i;
-//    for (int j = i+1; j < n; j++)
-//    if (arr[j] < arr[min_idx])
-//    min_idx = j;
-//    // Swap the found minimum element with the first
-//    // element
-//    double temp = arr[min_idx];
-//    arr[min_idx] = arr[i];
-//    arr[i] = temp;
-//    }
-//	return arr;
-//    }
 
     /**
      * Sorts an array of doubles using Quick Sort.
      * This method is static, thus it can be called as SortComparison.sort(a)
      * @param a: An unsorted array of doubles.
-     * @return array sorted in ascending order
+     * @return array sorted in aschighing order
      *
      */
-    static double [] quickSort (double a[]){
-    	quickSortLoop(a, 0, a.length);
-		return a;
+    static double[] quickSort (double a[]) {
+    	quickSort(a, 0, a.length-1);
+    	return a;
+    }
+    
+    static void quickSort(double a[], int low, int high) {
+        if (low < high) {
+            int partitionIndex = partition(a, low, high);
+     
+            quickSort(a, low, partitionIndex-1);
+            quickSort(a, partitionIndex+1, high);
+        }
+    }
+    	
+    static int partition(double a[], int low, int high) {
+        double pivot = a[high];
+        int i = (low-1);
+     
+        for (int j = low; j < high; j++) {
+            if (a[j] <= pivot) {
+                i++;
+     
+                double swapTemp = a[i];
+                a[i] = a[j];
+                a[j] = swapTemp;
+            }
+        }
+     
+        double swapTemp = a[i+1];
+        a[i+1] = a[high];
+        a[high] = swapTemp;
+     
+        return i+1;
     }
     
 
-    static double [] quickSortLoop (double a[], int low, int high){
-    	
-    	if(a == null) {
-    		return a;
-    	}
-    	
-    	if(low < high) {
-    		int partition = partition(a, low, high);
-    		quickSortLoop(a, low, partition - 1);
-    		quickSortLoop(a, partition+1, high);
-
-
-    	}
-		return a;
-    }//end quicksort
-    
-    private static int partition(double a[], int low, int high) {
-    	
-    	
-    	double pivotPoint = a[high];
-    	int  i = low - 1;
-    	for(int j = low; j < high; j++) {
-    		if(a[j] <= pivotPoint) {
-    			i++;
-    		}
-    		
-    		double temp = a[i+1];
-    		a[i] = a[j];
-    		a[j] = temp;
-
-    	}
-    	double temp = a[i+1];
-		a[i+1] = a[high];
-		a[high] = temp;
-		return i;
-    	
-    	
-    }
 
     /**
      * Sorts an array of doubles using Merge Sort.
      * This method is static, thus it can be called as SortComparison.sort(a)
      * @param a: An unsorted array of doubles.
-     * @return array sorted in ascending order
+     * @return array sorted in aschighing order
      *
      */
     /**
@@ -145,86 +118,132 @@
      * This method is static, thus it can be called as SortComparison.sort(a)
      *
      * @param a: An unsorted array of doubles.
-     * @return after the method returns, the array must be in ascending sorted order.
+     * @return after the method returns, the array must be in aschighing sorted order.
      */
-
-    static double[] mergeSortIterative (double a[]) {
-    	if(a == null || a.length <= 1) {
-    		return a;
+  static double[] mergeSortIterative (double a[]) {
+	  	int n  = a.length;
+    	double[] duplicate = new double[n];
+    	for (int count = 1; count < n; count = count*2) {
+    		for (int count2 = 0; count2 < n-count; count2 += count) {
+    			int low = count2;
+    			int middle = count+low-1;
+    			int high;
+    			if (2*count+low-1 > n-1) {
+    				high = n-1;
+    			}
+    			else{
+    				high = 2*count+low-1;
+    			}
+    			merge(a, duplicate, low, middle, high);
+    			count2 += count;
+    		}
     	}
-    	int size, low;
-		int N = a.length - 1; //size of array
-		for( size = 1 ; size <= N-1; size = (size + size)) {
-			for( low = 0; low < N - 1; low += (size + size)) {
-				int mid = Math.min(low + size - 1, N-1);
-				int high = Math.min(low + (size + size - 1), N-1);
-				int lowBoundary = mid - low + 1;
-				int midBoundary = high - mid;
-				
-				merge(a, low, mid, high, lowBoundary, midBoundary);
-					
-				}
-			}
 		return a;
-			
-		}
-	
-    //end mergesortIterative
-    
-    
-    
-    private static void merge(double[] a, int low, int mid, int high, int lowBoundary, int midBoundary) {
-    	//variables will be used by multiple loops
+    	}
+    	//end mergesortIterative
     	
-    	//instead of auxiliary these are temporary arrays with boundary limits
-    	double lowArray[] = new double[lowBoundary];
-    	double highArray[] = new double[midBoundary];
-    	int count = 0;
-    	while(count < lowBoundary) {
-    		lowArray[count] = a[low + count++];
-    	}
-    	count = 0;
-    	while(count < midBoundary) {
-    		highArray[count] = a[mid + 1 + count++];
-    	}
-    	int i, j;
-    	i = j = 0;
-    	int k=0;
+
+
+  static void merge (double[] a, double[] duplicate, int low, int middle, int high) {
+	  		boolean check = false;
+	  		int n = duplicate.length;
+    		int count = low;
+    		int count2 = middle+1;
+    		for (int iter4 = count; iter4<=high;iter4++) {
+    			duplicate[iter4] = a[iter4];
+    		}
+    		for (int count3 = count; count3 <= high; count3++) {
+    			if(high >= count2 && count2 < n && count < n && duplicate[count2]<duplicate[count]){
+    				check = true;
+    			}
+    			if (count>middle || (high >= count2 && check)) {
+    				a[count3] = duplicate[count2++];
+    			}
+    			else {
+    				a[count3] = duplicate[count++];
+    			}
+    		}
+  }
 
     	
-    	while(i < lowBoundary && j < midBoundary) {	//merging groups
-    		if(lowArray[i] <= highArray[j]) {
-    			a[k] = lowArray[i];
-    			i++;
-    		}
-    		else {
-    			a[k] = highArray[j];
-    			j++;
-    		}
-			k++;
-
-    	}
-    	while(i < lowBoundary) { //what is not initially sorted (low over) will be added to end of merge groups
-
-    		a[k] = lowArray[i];
-    		i++;
-    		k++;
-    	}
-    	while(j < midBoundary) {
-
-    		a[k] = highArray[j];
-    		j++;
-    		k++;
-    	}
-    			
-	}
+//
+//    static double[] mergeSortIterative (double a[]) {
+//    	if(a == null || a.length <= 1) {
+//    		return a;
+//    	}
+//    	int size, low;
+//		int N = a.length - 1; //size of array
+//		for( size = 1 ; size <= N-1; size = (size + size)) {
+//			for( low = 0; low < N - 1; low += (size + size)) {
+//				int mid = Math.min(low + size - 1, N-1);
+//				int high = Math.min(low + (size + size - 1), N-1);
+//				int lowBoundary = mid - low + 1;
+//				int midBoundary = high - mid;
+//				
+//				merge(a, low, mid, high, lowBoundary, midBoundary);
+//					
+//				}
+//			}
+//		return a;
+//			
+//		}
+//	
+//    //high mergesortIterative
+//    
+//    
+//    
+//    private static void merge(double[] a, int low, int mid, int high, int lowBoundary, int midBoundary) {
+//    	//variables will be used by multiple loops
+//    	
+//    	//instead of auxiliary these are temporary arrays with boundary limits
+//    	double lowArray[] = new double[lowBoundary];
+//    	double highArray[] = new double[midBoundary];
+//    	int count = 0;
+//    	while(count < lowBoundary) {
+//    		lowArray[count] = a[low + count++];
+//    	}
+//    	count = 0;
+//    	while(count < midBoundary) {
+//    		highArray[count] = a[mid + 1 + count++];
+//    	}
+//    	int i, j;
+//    	i = j = 0;
+//    	int k=0;
+//
+//    	
+//    	while(i < lowBoundary && j < midBoundary) {	//merging groups
+//    		if(lowArray[i] <= highArray[j]) {
+//    			a[k] = lowArray[i];
+//    			i++;
+//    		}
+//    		else {
+//    			a[k] = highArray[j];
+//    			j++;
+//    		}
+//			k++;
+//
+//    	}
+//    	while(i < lowBoundary) { //what is not initially sorted (low over) will be added to high of merge groups
+//
+//    		a[k] = lowArray[i];
+//    		i++;
+//    		k++;
+//    	}
+//    	while(j < midBoundary) {
+//
+//    		a[k] = highArray[j];
+//    		j++;
+//    		k++;
+//    	}
+//    			
+//	}
 
 	/**
      * Sorts an array of doubles using recursive implementation of Merge Sort.
      * This method is static, thus it can be called as SortComparison.sort(a)
      *
      * @param a: An unsorted array of doubles.
-     * @return after the method returns, the array must be in ascending sorted order.
+     * @return after the method returns, the array must be in aschighing sorted order.
      */
     
     static double[] mergeSortRecursive (double a[]) {
@@ -262,7 +281,7 @@
 			k++;
 
     	}
-    	while(i < low.length) { //what is not initially sorted (low over) will be added to end of merge groups
+    	while(i < low.length) { //what is not initially sorted (low over) will be added to high of merge groups
 
     		a[k] = low[i];
     		i++;
@@ -279,7 +298,7 @@
 
     	
     	return a;
-   }//end mergeSortRecursive
+   }//high mergeSortRecursive
     	
     
 
@@ -294,4 +313,4 @@
     
     
 
- }//end class
+ }//high class
